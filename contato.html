@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Contato | Cherry Secret 🍒</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- CABEÇALHO -->
+
+    <header class="topo">
+
+        <a
+            href="index.html"
+            class="logo"
+        >
+            🍒 <span>Cherry</span> Secret
+        </a>
+
+
+        <button
+            class="menu-btn"
+            id="menuBtn"
+        >
+            ☰
+        </button>
+
+
+        <nav id="nav">
+
+            <a href="index.html">
+                Início
+            </a>
+
+            <a href="produtos.html">
+                Produtos
+            </a>
+
+            <a href="sobre.html">
+                Sobre
+            </a>
+
+            <a href="contato.html">
+                Contato
+            </a>
+
+            <a
+                href="carrinho.html"
+                class="cart-link"
+            >
+                🛍️ Carrinho
+                <b id="cartCount">0</b>
+            </a>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- CONTEÚDO -->
+
+    <main>
+
+        <section class="page-title">
+
+            <p class="eyebrow">
+                CHERRY SECRET
+            </p>
+
+            <h1>
+                Fale com a gente
+            </h1>
+
+            <p>
+                Estamos aqui para ajudar você. 🍒
+            </p>
+
+        </section>
+
+
+
+        <section class="contact-page">
+
+
+            <!-- INFORMAÇÕES -->
+
+            <div class="contact-info">
+
+                <p class="eyebrow">
+                    ENTRE EM CONTATO
+                </p>
+
+                <h2>
+                    Vamos conversar?
+                </h2>
+
+                <p>
+                    Tem alguma dúvida sobre uma peça,
+                    tamanho, pedido ou entrega?
+                    Entre em contato com a Cherry Secret.
+                </p>
+
+
+                <div class="contact-item">
+
+                    <span>
+                        💌
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            E-mail
+                        </strong>
+
+                        <p>
+                            contato@cherrysecret.com
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="contact-item">
+
+                    <span>
+                        📱
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            WhatsApp
+                        </strong>
+
+                        <p>
+                            (00) 00000-0000
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="contact-item">
+
+                    <span>
+                        📸
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Instagram
+                        </strong>
+
+                        <p>
+                            @cherrysecret
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FORMULÁRIO -->
+
+            <form
+                class="contact-form"
+                id="contactForm"
+            >
+
+                <label for="name">
+                    Seu nome
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Digite seu nome"
+                    required
+                >
+
+
+                <label for="email">
+                    Seu e-mail
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Digite seu e-mail"
+                    required
+                >
+
+
+                <label for="message">
+                    Mensagem
+                </label>
+
+                <textarea
+                    id="message"
+                    name="message"
+                    rows="6"
+                    placeholder="Escreva sua mensagem..."
+                    required
+                ></textarea>
+
+
+                <button
+                    type="submit"
+                    class="btn full"
+                >
+                    Enviar mensagem 💌
+                </button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- RODAPÉ -->
+
+    <footer>
+
+        <div class="logo">
+            🍒 <span>Cherry</span> Secret
+        </div>
+
+        <p>
+            © 2026 Cherry Secret.
+        </p>
+
+    </footer>
+
+
+
+    <script src="script.js"></script>
+
+
+    <script>
+
+        const contactForm =
+            document.getElementById("contactForm");
+
+
+        if (contactForm) {
+
+            contactForm.addEventListener(
+                "submit",
+                function(event) {
+
+                    event.preventDefault();
+
+                    alert(
+                        "Mensagem enviada! 🍒\n\n" +
+                        "Obrigada por entrar em contato com a Cherry Secret."
+                    );
+
+                    contactForm.reset();
+
+                }
+            );
+
+        }
+
+    </script>
+
+</body>
+
+</html>

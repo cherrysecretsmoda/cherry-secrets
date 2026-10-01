@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Pagamento | Cherry Secret</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #fff8f6;
+            color: #5f0b1c;
+            min-height: 100vh;
+        }
+
+        .pagina {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px 20px 50px;
+        }
+
+        /* LOGO */
+
+        .logo-area {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .logo-area img {
+            width: 130px;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* TÍTULO */
+
+        .titulo {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .titulo .cherry {
+            color: #c59b3a;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+        }
+
+        .titulo h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 38px;
+            color: #6d0b20;
+            margin-bottom: 10px;
+        }
+
+        .titulo p {
+            color: #777;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        /* CAIXA PRINCIPAL */
+
+        .caixa {
+            background: white;
+            border-radius: 24px;
+            padding: 25px;
+            box-shadow: 0 10px 35px rgba(91, 11, 27, 0.10);
+            border: 1px solid #eadbd6;
+        }
+
+        /* RESUMO */
+
+        .resumo {
+            background: #fff5f2;
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 25px;
+        }
+
+        .resumo h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 21px;
+            margin-bottom: 15px;
+            color: #6d0b20;
+        }
+
+        .linha {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 7px 0;
+            color: #68434c;
+            font-size: 15px;
+        }
+
+        .total {
+            border-top: 1px solid #eadbd6;
+            margin-top: 10px;
+            padding-top: 14px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 21px;
+            font-weight: bold;
+            color: #6d0b20;
+        }
+
+        /* PIX */
+
+        .pix-titulo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .pix-titulo h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 27px;
+            color: #6d0b20;
+            margin-bottom: 7px;
+        }
+
+        .pix-titulo p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* QR CODE */
+
+        .qr-area {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .qr-code {
+            width: 220px;
+            height: 220px;
+            object-fit: contain;
+            border: 10px solid white;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.10);
+            background: white;
+        }
+
+        /* COPIA E COLA */
+
+        .copiar-area {
+            margin-top: 20px;
+        }
+
+        .copiar-area label {
+            display: block;
+            font-weight: bold;
+            color: #6d0b20;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .pix-codigo {
+            width: 100%;
+            min-height: 80px;
+            padding: 12px;
+            border: 1px solid #decfca;
+            border-radius: 12px;
+            background: #fafafa;
+            color: #555;
+            font-size: 12px;
+            resize: none;
+            outline: none;
+        }
+
+        .btn-copiar {
+            width: 100%;
+            margin-top: 10px;
+            padding: 15px;
+            border: none;
+            border-radius: 30px;
+            background: #8d0822;
+            color: white;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .btn-copiar:active {
+            transform: scale(0.98);
+        }
+
+        /* AVISO */
+
+        .aviso {
+            background: #fff8e8;
+            border: 1px solid #ead9a7;
+            border-radius: 14px;
+            padding: 15px;
+            margin-top: 22px;
+            color: #705b27;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        /* BOTÃO */
+
+        .btn-pagamento {
+            width: 100%;
+            margin-top: 22px;
+            padding: 18px;
+            border: none;
+            border-radius: 35px;
+            background: #d1a844;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-voltar {
+            display: block;
+            text-align: center;
+            margin-top: 18px;
+            color: #8d0822;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* MENSAGEM */
+
+        #mensagem {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            padding: 18px;
+            border-radius: 15px;
+            background: #f4eee5;
+            color: #684c24;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        /* CELULAR */
+
+        @media (max-width: 500px) {
+
+            .pagina {
+                padding: 22px 15px 40px;
+            }
+
+            .titulo h1 {
+                font-size: 32px;
+            }
+
+            .caixa {
+                padding: 20px;
+            }
+
+            .qr-code {
+                width: 200px;
+                height: 200px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="pagina">
+
+
+        <!-- LOGO -->
+
+        <div class="logo-area">
+
+            <img
+                src="Logo.cherry.jpg"
+                alt="Cherry Secret"
+            >
+
+        </div>
+
+
+        <!-- TÍTULO -->
+
+        <div class="titulo">
+
+            <div class="cherry">
+                CHERRY SECRET
+            </div>
+
+            <h1>
+                Finalizar pagamento
+            </h1>
+
+            <p>
+                Complete seu pagamento de forma rápida e segura.
+            </p>
+
+        </div>
+
+
+        <div class="caixa">
+
+
+            <!-- RESUMO DO PEDIDO -->
+
+            <div class="resumo">
+
+                <h2>
+                    Resumo do pedido
+                </h2>
+
+                <div
+                    id="lista-pedido"
+                >
+                    Carregando pedido...
+                </div>
+
+                <div class="total">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <span id="total-pedido">
+                        R$ 0,00
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- PIX -->
+
+            <div class="pix-titulo">
+
+                <h2>
+                    🍒 Pague com Pix
+                </h2>
+
+                <p>
+                    Escaneie o QR Code ou use o Pix Copia e Cola.
+                </p>
+
+            </div>
+
+
+            <!-- QR CODE -->
+
+            <div class="qr-area">
+
+                <!--
+                    COLOQUE A IMAGEM DO SEU QR CODE AQUI.
+
+                    Nome sugerido:
+                    pix-cherry.png
+                -->
+
+                <img
+                    src="pix-cherry.png"
+                    alt="QR Code Pix"
+                    class="qr-code"
+                >
+
+            </div>
+
+
+            <!-- PIX COPIA E COLA -->
+
+            <div class="copiar-area">
+
+                <label>
+                    Pix Copia e Cola
+                </label>
+
+                <textarea
+                    id="pixCodigo"
+                    class="pix-codigo"
+                    readonly
+                    placeholder="O código Pix aparecerá aqui."
+                ></textarea>
+
+                <button
+                    class="btn-copiar"
+                    type="button"
+                    onclick="copiarPix()"
+                >
+                    📋 COPIAR CÓDIGO PIX
+                </button>
+
+            </div>
+
+
+            <!-- AVISO -->
+
+            <div class="aviso">
+
+                <strong>
+                    Importante:
+                </strong>
+
+                Depois de fazer o Pix, o pagamento precisa ser
+                conferido antes de o pedido ser considerado pago.
+
+            </div>
+
+
+            <!-- BOTÃO -->
+
+            <button
+                class="btn-pagamento"
+                type="button"
+                onclick="informarPagamento()"
+            >
+                ✅ JÁ FIZ O PAGAMENTO
+            </button>
+
+
+            <div id="mensagem">
+
+                Obrigada! 🍒
+
+                <br><br>
+
+                Seu pedido foi enviado para conferência.
+                O pagamento será confirmado após a verificação do Pix.
+
+            </div>
+
+
+            <a
+                href="index.html"
+                class="btn-voltar"
+            >
+                ← Voltar para a loja
+            </a>
+
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        // =====================================
+        // PEDIDO
+        // =====================================
+
+        const carrinho =
+            JSON.parse(
+                localStorage.getItem("cherryCarrinho")
+            ) || [];
+
+
+        const listaPedido =
+            document.getElementById(
+                "lista-pedido"
+            );
+
+
+        const totalPedido =
+            document.getElementById(
+                "total-pedido"
+            );
+
+
+        function dinheiro(valor) {
+
+            return valor.toLocaleString(
+                "pt-BR",
+                {
+                    style: "currency",
+                    currency: "BRL"
+                }
+            );
+
+        }
+
+
+        function carregarPedido() {
+
+            if (carrinho.length === 0) {
+
+                listaPedido.innerHTML =
+                    "<p>Nenhum produto no carrinho.</p>";
+
+                totalPedido.textContent =
+                    "R$ 0,00";
+
+                return;
+
+            }
+
+
+            listaPedido.innerHTML = "";
+
+
+            let total = 0;
+
+
+            carrinho.forEach(item => {
+
+                const subtotal =
+                    item.preco *
+                    item.quantidade;
+
+
+                total += subtotal;
+
+
+                const linha =
+                    document.createElement("div");
+
+
+                linha.className =
+                    "linha";
+
+
+                linha.innerHTML = `
+
+                    <span>
+                        ${item.nome}
+                        × ${item.quantidade}
+                    </span>
+
+                    <strong>
+                        ${dinheiro(subtotal)}
+                    </strong>
+
+                `;
+
+
+                listaPedido.appendChild(linha);
+
+            });
+
+
+            totalPedido.textContent =
+                dinheiro(total);
+
+        }
+
+
+        // =====================================
+        // COPIAR PIX
+        // =====================================
+
+        function copiarPix() {
+
+            const campo =
+                document.getElementById(
+                    "pixCodigo"
+                );
+
+
+            if (!campo.value) {
+
+                alert(
+                    "O código Pix ainda não foi configurado."
+                );
+
+                return;
+
+            }
+
+
+            navigator.clipboard.writeText(
+                campo.value
+            )
+            .then(function() {
+
+                alert(
+                    "Código Pix copiado! 🍒"
+                );
+
+            })
+            .catch(function() {
+
+                campo.select();
+
+                document.execCommand("copy");
+
+                alert(
+                    "Código Pix copiado! 🍒"
+                );
+
+            });
+
+        }
+
+
+        // =====================================
+        // JÁ FIZ O PAGAMENTO
+        // =====================================
+
+        function informarPagamento() {
+
+            const mensagem =
+                document.getElementById(
+                    "mensagem"
+                );
+
+
+            mensagem.style.display =
+                "block";
+
+
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: "smooth"
+            });
+
+        }
+
+
+        // =====================================
+        // INICIAR
+        // =====================================
+
+        carregarPedido();
+
+    </script>
+
+</body>
+
+</html>

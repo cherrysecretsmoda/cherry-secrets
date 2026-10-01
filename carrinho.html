@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Cherry Secret | Carrinho</title>
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
+  <style>
+    /* =========================
+       CARRINHO
+    ========================= */
+
+    .cart-page {
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 55px 6%;
+    }
+
+    .cart-title {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .cart-title h1 {
+      font-family: "Playfair Display", Georgia, serif;
+      color: var(--dark);
+      font-size: 44px;
+      margin-bottom: 8px;
+    }
+
+    .cart-title p {
+      color: var(--muted);
+    }
+
+    .cart-row {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 15px;
+      margin-bottom: 18px;
+      box-shadow: 0 8px 25px rgba(80,20,30,.07);
+    }
+
+    /* FOTO DO PRODUTO */
+    .cart-row img {
+      width: 150px;
+      height: 190px;
+      object-fit: contain;
+      object-position: center;
+      background: #f8eeee;
+      border-radius: 12px;
+      padding: 5px;
+      flex-shrink: 0;
+    }
+
+    .cart-row-info {
+      flex: 1;
+    }
+
+    .cart-row-info h3 {
+      font-family: "Playfair Display", Georgia, serif;
+      color: var(--dark);
+      font-size: 25px;
+      margin-bottom: 8px;
+    }
+
+    .cart-row-info p {
+      color: var(--muted);
+      margin: 5px 0;
+    }
+
+    .qty {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 15px 0;
+    }
+
+    .qty button {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--red);
+      border-radius: 50%;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .qty button:hover {
+      background: var(--red);
+      color: #fff;
+    }
+
+    .remove {
+      border: 0;
+      background: none;
+      color: #a00020;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .cart-summary {
+      margin-top: 30px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 25px;
+      text-align: right;
+    }
+
+    .cart-summary p {
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+
+    .cart-summary h2 {
+      color: var(--dark);
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .checkout-btn {
+      display: inline-block;
+      border: 0;
+      background: var(--red);
+      color: #fff;
+      padding: 15px 28px;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .checkout-btn:hover {
+      background: var(--dark);
+    }
+
+    /* =========================
+       CHECKOUT
+    ========================= */
+
+    .checkout {
+      display: none;
+      max-width: 700px;
+      margin: 35px auto 0;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 8px 25px rgba(80,20,30,.08);
+    }
+
+    .checkout.show {
+      display: block;
+    }
+
+    .checkout h2 {
+      font-family: "Playfair Display", Georgia, serif;
+      color: var(--dark);
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .checkout label {
+      display: block;
+      color: var(--dark);
+      font-weight: 700;
+      margin: 15px 0 7px;
+    }
+
+    .checkout input,
+    .checkout select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 13px;
+      font: inherit;
+      outline: none;
+      background: #fff;
+    }
+
+    .checkout input:focus,
+    .checkout select:focus {
+      border-color: var(--red);
+    }
+
+    .payment-box {
+      margin-top: 22px;
+      padding: 18px;
+      background: #fff8f8;
+      border-radius: 14px;
+    }
+
+    .payment-box h3 {
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+
+    .finish-payment {
+      width: 100%;
+      margin-top: 20px;
+      border: 0;
+      background: var(--gold);
+      color: #fff;
+      padding: 15px;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .empty-cart {
+      text-align: center;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 40px 20px;
+      color: var(--muted);
+    }
+
+    @media(max-width:800px) {
+
+      .cart-page {
+        padding: 40px 5%;
+      }
+
+      .cart-title h1 {
+        font-size: 38px;
+      }
+
+      .cart-row {
+        gap: 14px;
+        padding: 12px;
+      }
+
+      .cart-row img {
+        width: 130px;
+        height: 170px;
+      }
+
+      .cart-row-info h3 {
+        font-size: 20px;
+      }
+
+      .cart-summary {
+        text-align: center;
+      }
+
+    }
+  </style>
+
+</head>
+
+
+<body>
+
+  <!-- CABEÇALHO -->
+
+  <header class="topo">
+
+    <a
+      href="index.html"
+      class="logo"
+    >
+      <img
+        src="Logo.cherry.jpg"
+        alt="Cherry Secret"
+      >
+    </a>
+
+    <button
+      class="menu-btn"
+      id="menuBtn"
+      type="button"
+      aria-label="Abrir menu"
+    >
+      ☰
+    </button>
+
+    <nav id="nav">
+
+      <a href="index.html">
+        Início
+      </a>
+
+      <a href="produtos.html">
+        Produtos
+      </a>
+
+      <a href="sobre.html">
+        Sobre
+      </a>
+
+      <a href="contato.html">
+        Contato
+      </a>
+
+      <a
+        href="carrinho.html"
+        class="cart-link"
+      >
+        🛍️ Carrinho
+        <b
+          id="cartCount"
+          data-cart-count
+        >
+          0
+        </b>
+      </a>
+
+    </nav>
+
+  </header>
+
+
+  <!-- CARRINHO -->
+
+  <main class="cart-page">
+
+    <div class="cart-title">
+
+      <p class="eyebrow">
+        CHERRY SECRET
+      </p>
+
+      <h1>
+        Meu carrinho
+      </h1>
+
+      <p>
+        Confira suas peças antes de finalizar.
+      </p>
+
+    </div>
+
+
+    <div id="cartPageItems"></div>
+
+
+    <div class="cart-summary">
+
+      <p>
+        Total da compra
+      </p>
+
+      <h2 id="cartPageTotal">
+        R$ 0,00
+      </h2>
+
+      <button
+        class="checkout-btn"
+        id="checkoutBtn"
+        type="button"
+      >
+        FINALIZAR COMPRA
+      </button>
+
+    </div>
+
+
+    <!-- CHECKOUT -->
+
+    <section
+      class="checkout"
+      id="checkout"
+    >
+
+      <h2>
+        Finalizar pedido 🍒
+      </h2>
+
+      <p>
+        Preencha seus dados para continuar.
+      </p>
+
+
+      <label for="name">
+        Nome completo
+      </label>
+
+      <input
+        id="name"
+        type="text"
+        placeholder="Digite seu nome"
+      >
+
+
+      <label for="phone">
+        Telefone
+      </label>
+
+      <input
+        id="phone"
+        type="tel"
+        placeholder="(00) 00000-0000"
+      >
+
+
+      <label for="address">
+        Endereço
+      </label>
+
+      <input
+        id="address"
+        type="text"
+        placeholder="Rua, número e bairro"
+      >
+
+
+      <label for="payment">
+        Forma de pagamento
+      </label>
+
+      <select id="payment">
+
+        <option value="">
+          Selecione uma opção
+        </option>
+
+        <option value="pix">
+          Pix
+        </option>
+
+        <option value="cartao">
+          Cartão
+        </option>
+
+        <option value="dinheiro">
+          Dinheiro
+        </option>
+
+      </select>
+
+
+      <div class="payment-box">
+
+        <h3>
+          Pagamento
+        </h3>
+
+        <p>
+          Escolha a forma de pagamento acima
+          para continuar.
+        </p>
+
+      </div>
+
+
+      <button
+        class="finish-payment"
+        id="finishPayment"
+        type="button"
+      >
+        CONTINUAR PARA PAGAMENTO
+      </button>
+
+    </section>
+
+  </main>
+
+
+  <!-- RODAPÉ -->
+
+  <footer>
+
+    <div class="logo">
+
+      <img
+        src="Logo.cherry.jpg"
+        alt="Cherry Secret"
+      >
+
+    </div>
+
+    <div class="footer-links">
+
+      <a href="index.html">
+        Início
+      </a>
+
+      <a href="produtos.html">
+        Produtos
+      </a>
+
+      <a href="sobre.html">
+        Sobre
+      </a>
+
+      <a href="contato.html">
+        Contato
+      </a>
+
+    </div>
+
+    <p>
+      © 2026 Cherry Secret. Todos os direitos reservados.
+    </p>
+
+  </footer>
+
+
+  <!-- SCRIPT PRINCIPAL -->
+
+  <script src="script.js"></script>
+
+
+  <!-- SCRIPT DO CHECKOUT -->
+
+  <script>
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function(){
+
+        const checkoutBtn =
+          document.getElementById("checkoutBtn");
+
+        const checkout =
+          document.getElementById("checkout");
+
+        const finishPayment =
+          document.getElementById("finishPayment");
+
+
+        checkoutBtn.addEventListener(
+          "click",
+          function(){
+
+            const cart =
+              JSON.parse(
+                localStorage.getItem("cherrySecretCart")
+              ) || [];
+
+
+            if(cart.length === 0){
+
+              alert(
+                "Seu carrinho está vazio. 🍒"
+              );
+
+              return;
+
+            }
+
+
+            checkout.classList.add("show");
+
+            checkout.scrollIntoView({
+              behavior:"smooth",
+              block:"start"
+            });
+
+          }
+        );
+
+
+        finishPayment.addEventListener(
+          "click",
+          function(){
+
+            const name =
+              document.getElementById("name").value.trim();
+
+            const phone =
+              document.getElementById("phone").value.trim();
+
+            const address =
+              document.getElementById("address").value.trim();
+
+            const payment =
+              document.getElementById("payment").value;
+
+
+            if(!name || !phone || !address){
+
+              alert(
+                "Preencha seu nome, telefone e endereço. 🍒"
+              );
+
+              return;
+
+            }
+
+
+            if(!payment){
+
+              alert(
+                "Escolha uma forma de pagamento. 🍒"
+              );
+
+              return;
+
+            }
+
+
+            alert(
+              "Pedido preparado com sucesso! 🍒\n\n" +
+              "Agora é necessário conectar um serviço de pagamento " +
+              "para receber o Pix ou cartão de verdade."
+            );
+
+          }
+        );
+
+      }
+    );
+
+  </script>
+
+</body>
+
+</html>
